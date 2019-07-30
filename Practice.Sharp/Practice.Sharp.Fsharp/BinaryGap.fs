@@ -1,0 +1,1 @@
+﻿module BinaryGap  open System let evaluateRange (number: int) =   match number >= 1 && number <= 2147483647 with                                     | true -> "ano"                                     | false -> "ne"  let intToBin (number: int) = Convert.ToString (number, 2)      
