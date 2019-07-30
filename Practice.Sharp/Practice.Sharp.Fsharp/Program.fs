@@ -3,5 +3,5 @@ open BinaryGap
 
 [<EntryPoint>]
 let main argv =
-    printfn "Hello World from F#!"
+    printfn "%A" (result 10000)
     0 // return an integer exit code
