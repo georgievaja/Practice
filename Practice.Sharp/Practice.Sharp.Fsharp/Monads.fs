@@ -14,13 +14,13 @@ module Operators =
 
     let (>>=) = bind
 
-    let compose (f1: 'a -> Result<'b, 'e>)
-                (f2: 'b -> Result<'c, 'e>)
-                (arg: 'a): Result<'c,'e> =
-        match f1 arg with
-        | Success s -> f2 s
-        | Failure f -> Failure f
+    let (>=>) f1 f2 arg =
+        f1 arg >>= f2
 
-    let (>>) = compose
-        
+    let (++) f1 f2 =
+        match f1 with
+        | Success s1 -> match f2 with
+                        | Success s2 -> Success (s1, s2)
+                        | Failure f2 -> Failure f2
+        | Failure f1 -> Failure f1
     
