@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using static Practice.Sharp.Csharp.BinaryGap;
 
 namespace Practice.Sharp.Csharp
 {
@@ -6,7 +8,13 @@ namespace Practice.Sharp.Csharp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var testData = new string[] { "9", "529", "51272", "15", "53", "2147483647", "2147483648", "0", "-1", "A", null };
+
+            foreach (var data in testData)
+            {
+                var gap = GetBinaryGap(data);
+                Console.WriteLine($"{gap}, {data}");
+            }
         }
     }
 }
