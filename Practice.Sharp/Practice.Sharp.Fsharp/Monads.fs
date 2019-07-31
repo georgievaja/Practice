@@ -12,7 +12,15 @@ module Operators =
         | Success(x) -> f x
         | Failure f -> Failure f
 
+    let bind2   (res: 'a -> Result<'b, 'e>) 
+                (f: 'b -> 'c) 
+                (arg: 'a ): Result<'c, 'e> =
+        match res arg with
+        | Success(x) -> f x |> Success
+        | Failure f -> Failure f
+
     let (>>=) = bind
+    let (=>>) = bind2
 
     let (>=>) f1 f2 arg =
         f1 arg >>= f2
