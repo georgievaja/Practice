@@ -4,4 +4,4 @@
 let InvalidRange = "Value is in invalid range"
 
 [<Literal>]
-let InvalidIntType = "Value is not an int64 type"
+let InvalidIntType = "Value is not a valid int32 type"
