@@ -2,7 +2,7 @@
 open System
 
     module Int64 =
-        let convertToBinary (number: int64) = Convert.ToString (number, 2)    
+        let convertToBinary (number: int) = Convert.ToString (number, 2)    
 
     module Array =
         let tryMaxBy    (selector)

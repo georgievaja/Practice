@@ -3,32 +3,29 @@ namespace Practice.Sharp.Csharp
 {
     public static class BinaryGap
     {
-        public static int GetBinaryGap(string n)
+        public static int GetBinaryGap(int num)
         {
-            if (int.TryParse(n, out int number) && number > 0 && number < 2147483647)
+            var current = 0;
+            var max = 0;
+            var counting = false;
+
+            for(uint i= 0; i < sizeof(int) * 8; i++)
             {
-                var b = Convert.ToString(number, 2);
+                var currPowTwo = (int)Math.Pow(2.0, i);
 
-                int longest = 0;
-                int curCount = 0;
-
-                for (int i = 0; i < b.Length; i++)
+                if(currPowTwo == (num & currPowTwo))
                 {
-                    if (b[i] == '0')
-                    {
-                        curCount++;
-                    }else
-                    {
-                        curCount = 0;
-                    }
-
-                    if (curCount > longest) longest = curCount;
+                    max = current > max ? current : max;
+                    current = 0;
+                    counting = true;
                 }
-
-                return longest;
+                else
+                {
+                    if(counting) current++;
+                }
             }
 
-            return 0;
+            return max;
         }
     }
 }
