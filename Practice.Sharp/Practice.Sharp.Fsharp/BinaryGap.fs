@@ -3,8 +3,6 @@
 open System
 open Monads.Operators
 open Validators
-open Extensions
-open System.Runtime.InteropServices
 
 let allOnes (num: int) =
     ((num+1) &&& num = 0) && (num <> 0)
@@ -18,7 +16,6 @@ let rec shift (steps: int) (num: int)=
     match allOnes(num) with
         | true    ->  steps
         | false   ->  shift (steps + 1) (num ||| (num <<< 1))
-
 
 let getBinaryGap =
     evaluateType

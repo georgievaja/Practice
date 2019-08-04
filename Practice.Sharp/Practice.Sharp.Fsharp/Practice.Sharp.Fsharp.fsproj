@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Extensions.fs" />
     <Compile Include="Constants.fs" />
     <Compile Include="Monads.fs" />
     <Compile Include="Validators.fs" />
