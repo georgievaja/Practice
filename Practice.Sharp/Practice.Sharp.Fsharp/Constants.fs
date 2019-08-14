@@ -17,3 +17,6 @@ let InvalidIntType = "Value is not a valid int32 type"
 
 [<Literal>]
 let InvalidCountOfOddOcc = "Found invalid count of odd occurrences"
+
+[<Literal>]
+let OddOccurenceNotFound = "Odd occurrence is not present in an array"

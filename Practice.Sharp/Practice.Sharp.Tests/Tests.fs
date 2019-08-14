@@ -60,6 +60,12 @@ module BinaryGapTests =
         Assert.False(succeeds)
 
 module OddOccurencesTests = 
+    [<Fact>]
+    let ``Odd occurrences finds nothing`` () =
+       let data = [|9;3;9;3;9;9|]
+       let result = findOddOccurrence data 
+       
+       Assert.Equal(result, Failure OddOccurenceNotFound)
 
     [<Fact>]
     let ``Odd occurrences returns 7`` () =
