@@ -17,12 +17,8 @@ let rec shift (steps: int) (num: int) =
         | true    ->  steps
         | false   ->  shift (steps + 1) (num ||| (num <<< 1))
 
-/// <summary>Counts A binary gap within a positive integer N is any maximal sequence of consecutive zeros 
-/// that is surrounded by ones at both ends in the binary representation of N.
-/// N is an integer within the range [1..2,147,483,647]. </summary>
-let getBinaryGap =
-    evaluateType
-        >=> evaluateRange 1 2147483647
+let getBinaryGap min max =
+    evaluateRange min max
         =>> (removeTrailingZeros
              >> shift 0)
     

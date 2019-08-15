@@ -9,8 +9,10 @@
     <Compile Include="Constants.fs" />
     <Compile Include="Monads.fs" />
     <Compile Include="Validators.fs" />
-    <Compile Include="OddOccurrencesInArray.fs" />
     <Compile Include="BinaryGap.fs" />
+    <Compile Include="OddOccurrencesInArray.fs" />
+    <Compile Include="CyclicRotation.fs" />
+    <Compile Include="Lessons.fs" />
   </ItemGroup>
 
 </Project>
