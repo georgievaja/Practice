@@ -106,3 +106,43 @@ module OddOccurencesTests =
         let result = onGetOddOccurence data 
 
         Assert.Equal(result, Failure InvalidArrayMax)
+
+module CyclicRotation =
+
+    [<Theory>]
+    [<InlineData(3)>]
+    [<InlineData(8)>]
+    [<InlineData(13)>]
+    [<InlineData(18)>]
+    [<InlineData(98)>]
+    [<InlineData(93)>]
+    [<InlineData(53)>]
+    let ``Rotation returns correct result`` (k: int) =
+        let data = [|3; 8; 9; 7; 6|]
+        let result = onIntArrayRotate data k
+        let expected: int[] = [|9; 7; 6; 3; 8|]
+
+        Assert.Equal(result, Success expected)
+
+    [<Theory>]
+    [<InlineData(-1)>]
+    [<InlineData(101)>]
+    let ``Rotation returns k out of range result`` (k: int) =
+        let data = [|0..99|]
+        let result = onIntArrayRotate data k
+
+        Assert.Equal(result, Failure InvalidRange)
+
+    [<Fact>]
+    let ``Rotation returns array out of range result`` () =
+        let data = [|0..100|]
+        let result = onIntArrayRotate data 3
+
+        Assert.Equal(result, Failure InvalidArrayRange)
+
+    [<Fact>]
+      let ``Rotation by 0 returns correct result`` () =
+          let data = [|0;1;2;3;4;5|]
+          let result = onIntArrayRotate data 0
+
+          Assert.Equal(result, Success data)
