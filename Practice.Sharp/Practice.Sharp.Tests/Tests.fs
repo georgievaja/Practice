@@ -1,10 +1,22 @@
-namespace Practice.Sharp.Tests
+namespace Tests
 
 open Lessons
 open System
 open Xunit
 open Monads
 open Constants
+open Practice.Sharp.Csharp
+
+module Sorts =
+  [<Theory>]
+  [<InlineData(5,2,4,6,1,3)>]
+  [<InlineData(1)>]
+  [<InlineData(2,2,2,34,34,2,1,1)>]
+  let ``Insert sort succeeds`` ([<ParamArray>] data: int[]) =
+      let result = data.SortUsingInsertion()
+      let expected = Array.sort(data)
+
+      Assert.Equal<int[]>(expected, result) 
 
 module BinaryGapTests =
 

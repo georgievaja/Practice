@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Practice.Sharp.Csharp\Practice.Sharp.Csharp.csproj" />
     <ProjectReference Include="..\Practice.Sharp.Fsharp\Practice.Sharp.Fsharp.fsproj" />
   </ItemGroup>
 
