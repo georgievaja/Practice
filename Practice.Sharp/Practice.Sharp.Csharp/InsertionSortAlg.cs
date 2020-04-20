@@ -5,17 +5,17 @@ namespace Practice.Sharp.Csharp
     /// <summary>
     /// Time complexity c * n2
     /// </summary>
-    public static class InsertionSort
+    public static class InsertionSortAlg
     {
-        public static int[] SortUsingInsertion(this int[] array)
+        public static int[] InsertionSort(this int[] array)
         {
             for (var i = 0; i < array.Length; i++)
             {
                 while(i > 0 && array[i] < array[i -1])
                 {
-                    var bigger = array[i - 1];
+                    var tmp = array[i - 1];
                     array[i - 1] = array[i];
-                    array[i] = bigger;
+                    array[i] = tmp;
                     i -= i;
                 }
             }
