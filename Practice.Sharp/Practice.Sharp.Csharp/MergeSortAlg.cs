@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Practice.Sharp.Csharp
 {
+    /// <summary>
+    /// Complexity O(n lg n)
+    /// </summary>
     public static class MergeSortAlg
     {
         public static int[] MergeSort(this int[] unsorted, int beginning, int end)
@@ -49,26 +52,22 @@ namespace Practice.Sharp.Csharp
                 {
                     if (left[i] <= right[j])
                     {
-                        Debug.WriteLine($"Array element replaced on index: {k} by value: {left[i]}");
                         arr[k] = left[i];
                         i++;
                     }
                     else
                     {
-                        Debug.WriteLine($"Array element replaced on index: {k} by value: {right[j]}");
                         arr[k] = right[j];
                         j++;
                     }
                 }
                 else if (i < left.Length)
                 {
-                    Debug.WriteLine($"Array element replaced on index: {k} by value: {left[i]}");
                     arr[k] = left[i];
                     i++;
                 }
                 else if (j < right.Length)
                 {
-                    Debug.WriteLine($"Array element replaced on index: {k} by value: {right[j]}");
                     arr[k] = right[j];
                     j++;
                 }

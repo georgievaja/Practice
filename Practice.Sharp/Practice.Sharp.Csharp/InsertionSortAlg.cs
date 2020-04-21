@@ -3,7 +3,7 @@
 namespace Practice.Sharp.Csharp
 {
     /// <summary>
-    /// Time complexity c * n2
+    /// Complexity O(n²)
     /// </summary>
     public static class InsertionSortAlg
     {

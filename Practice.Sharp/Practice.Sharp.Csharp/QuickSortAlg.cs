@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Practice.Sharp.Csharp
 {
+    /// <summary>
+    /// Complexity O(n²)
+    /// </summary>
     public static class QuickSortAlg
     {
         public static void QuickSort(this int[] A, int left, int right)
@@ -25,7 +28,7 @@ namespace Practice.Sharp.Csharp
 
             int end = left;
 
-            int pivot = A[right];    // choose last one to pivot, easy to code
+            int pivot = A[right];    // choose last one to pivot
             for (int i = left; i < right; i++)
             {
                 if (A[i] < pivot)
