@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Practice.Sharp.Csharp
+namespace Practice.Sharp.Csharp.Sorts.Comparision
 {
     /// <summary>
     /// Complexity O(n²)
@@ -17,8 +17,8 @@ namespace Practice.Sharp.Csharp
 
             if (index != -1)
             {
-                QuickSort(A, left, index - 1);
-                QuickSort(A, index + 1, right);
+                A.QuickSort(left, index - 1);
+                A.QuickSort(index + 1, right);
             }
         }
 

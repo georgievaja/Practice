@@ -5,7 +5,7 @@ open System
 open Xunit
 open Monads
 open Constants
-open Practice.Sharp.Csharp
+open Practice.Sharp.Csharp.Sorts.Comparision
 
 module Sorts =
     [<Theory>]
@@ -15,9 +15,9 @@ module Sorts =
     [<InlineData(10,9,8,7,6,5,4,3,2,1)>]
     let ``Insert sort succeeds`` ([<ParamArray>] data: int[]) =
         let expected = Array.sort(data)
-        let result = data.InsertionSort()
+        data.InsertionSort()
 
-        Assert.Equal<int[]>(expected, result) 
+        Assert.Equal<int[]>(expected, data) 
 
     [<Theory>]
     [<InlineData(5,2,4,6,1,3)>]
@@ -30,9 +30,24 @@ module Sorts =
     [<InlineData(0,-2,2,2,0,0,0,0)>]
     let ``Merge sort succeeds`` ([<ParamArray>] data: int[]) =
         let expected = Array.sort(data)
-        let result = data.MergeSort(0, data.Length - 1)
+        data.MergeSort(0, data.Length - 1)
 
-        Assert.Equal<int[]>(expected, result) 
+        Assert.Equal<int[]>(expected, data) 
+
+    [<Theory>]
+    [<InlineData(5,2,4,6,1,3)>]
+    [<InlineData(1)>]
+    [<InlineData(2,1)>]
+    [<InlineData(5,2,1)>]
+    [<InlineData(2,2,2,34,34,2,1,1)>]
+    [<InlineData(10,9,8,7,6,5,4,3,2,1)>]
+    [<InlineData(5,2,4,7,1,3,2,6)>]
+    [<InlineData(0,-2,2,2,0,0,0,0)>]
+    let ``Heap sort succeeds`` ([<ParamArray>] data: int[]) =
+        let expected = Array.sort(data)
+        data.HeapSort()
+
+        Assert.Equal<int[]>(expected, data) 
 
     [<Theory>]
     [<InlineData(5,2,4,6,1,3)>]
@@ -40,8 +55,8 @@ module Sorts =
     [<InlineData(2,2,2,34,34,2,1,1)>]
     [<InlineData(10,9,8,7,6,5,4,3,2,1)>]
     let ``Quick sort succeeds`` ([<ParamArray>] data: int[]) =
-        data.QuickSort(0, data.Length-1)
         let expected = Array.sort(data)
+        data.QuickSort(0, data.Length-1)
 
         Assert.Equal<int[]>(expected, data) 
 

@@ -4,24 +4,22 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace Practice.Sharp.Csharp
+namespace Practice.Sharp.Csharp.Sorts.Comparision
 {
     /// <summary>
     /// Complexity O(n lg n)
     /// </summary>
     public static class MergeSortAlg
     {
-        public static int[] MergeSort(this int[] unsorted, int beginning, int end)
+        public static void MergeSort(this int[] unsorted, int beginning, int end)
         {
-            if (beginning < end) 
+            if (beginning < end)
             {
                 var middle = (beginning + end) / 2;
-                MergeSort(unsorted, beginning, middle);
-                MergeSort(unsorted, middle + 1, end);
-                return Merge(unsorted, beginning, middle, end);
+                unsorted.MergeSort(beginning, middle);
+                unsorted.MergeSort(middle + 1, end);
+                Merge(unsorted, beginning, middle, end);
             }
-
-            return unsorted;
         }
 
         private static int[] Merge(int[] arr, int beginning, int middle, int end)
