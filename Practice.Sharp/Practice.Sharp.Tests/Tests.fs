@@ -6,6 +6,34 @@ open Xunit
 open Monads
 open Constants
 open Practice.Sharp.Csharp.Sorts.Comparision
+open Practice.Sharp.Csharp.Data_Structures
+
+module DataStructures =
+    [<Fact>]
+    let ``Stack LIFO works`` () =
+        let expected = [|15;6;2;9;17;3;|]
+        let stack = new Stack<int>(10)
+        stack.Push(15)
+        stack.Push(12)
+        stack.Pop() |> ignore
+        stack.Push(6)
+        stack.Push(2)
+        stack.Push(9)
+        stack.Push(17)
+        stack.Push(3)
+
+        Assert.Equal<int[]>(expected, stack.ToArray()) 
+
+    [<Fact>]
+    let ``Stack POP throws underflow exception`` () =
+        let stack = new Stack<int>(10)
+        stack.Push(15)
+        stack.Push(12)
+        stack.Pop() |> ignore
+        stack.Pop() |> ignore
+
+        let underflowPop = new Func<obj>(fun () -> stack.Pop() :> obj)
+        Assert.Throws<InvalidOperationException>(underflowPop)
 
 module Sorts =
     [<Theory>]
