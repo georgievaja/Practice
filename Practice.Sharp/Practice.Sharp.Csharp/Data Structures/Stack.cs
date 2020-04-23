@@ -46,12 +46,7 @@ namespace Practice.Sharp.Csharp.Data_Structures
         /// </summary>
         public void Push(T item)
         {
-            if (Size == Array.Length)
-            {
-                var newArray = new T[2 * Array.Length];
-                System.Array.Copy(Array, 0, newArray, 0, Size);
-                Array = newArray;
-            }
+            if (Size == Array.Length) throw new InvalidOperationException("Stack overflow");
             Array[Size++] = item;
         }
 

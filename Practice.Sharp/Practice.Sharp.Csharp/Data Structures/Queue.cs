@@ -5,10 +5,10 @@ using JetBrains.Annotations;
 
 namespace Practice.Sharp.Csharp.Data_Structures
 {
-    public sealed class Queue<T> where T: class
+    public sealed class Queue
     {
         private const int DefaultQueueCapacity = 10;
-        private T[] Array { get; set; }
+        private object[] Array { get; set; }
         private int Size { get; set; }
 
         /// <summary>
@@ -23,14 +23,14 @@ namespace Practice.Sharp.Csharp.Data_Structures
 
         public Queue(int capacity)
         {
-            Array = new T[capacity];
+            Array = new object[capacity];
             Size = 0;
             Head = 0;
             Tail = 0;
         }
 
         public Queue(
-            [CanBeNull] ICollection<T> items) 
+            [CanBeNull] ICollection<object> items) 
             : this(items?.Count ?? DefaultQueueCapacity)
         {
             if (items == null) return;
@@ -41,24 +41,21 @@ namespace Practice.Sharp.Csharp.Data_Structures
             }
         }
 
-        public void Enqueue(T item)
+        public void Enqueue(object item)
         {
-            if(Array.Length == Size)
-            {
-                var newArray = new T[2 * Array.Length];
-                System.Array.Copy(Array, 0, newArray, 0, Size);
-                Array = newArray;
-            }
+            if (Size == Array.Length) throw new InvalidOperationException("Stack overflow");
 
             Array[Tail] = item;
-            Tail = Tail == Array.Length - 1 ?  0 : Tail++;
+            Tail = Tail == Array.Length - 1 ?  0 : Tail + 1;
             Size++;
         }
 
         public void Dequeue()
         {
+            if(Size == 0) throw new InvalidOperationException("Stack underflow");
+
             Array[Head] = null;
-            Head = Head == Array.Length - 1 ? 0 : Head++;
+            Head = Head == Array.Length -1 ? 0 : Head + 1;
             Size--;
         }
     }

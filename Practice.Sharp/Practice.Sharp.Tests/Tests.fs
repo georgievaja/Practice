@@ -10,6 +10,19 @@ open Practice.Sharp.Csharp.Data_Structures
 
 module DataStructures =
     [<Fact>]
+    let ``Queue head, tail are right`` () =
+        let col = [|15;6;2;9;17;3;|] |> Array.map (fun v -> v :> obj)
+        let queue = new Queue(col)
+        Assert.Equal<int>(0, queue.Head)
+        Assert.Equal<int>(0, queue.Tail)
+
+        queue.Dequeue()
+        queue.Dequeue()
+        queue.Enqueue(10)
+        Assert.Equal<int>(2, queue.Head)
+        Assert.Equal<int>(1, queue.Tail)       
+
+    [<Fact>]
     let ``Stack LIFO works`` () =
         let expected = [|15;6;2;9;17;3;|]
         let stack = new Stack<int>(10)
