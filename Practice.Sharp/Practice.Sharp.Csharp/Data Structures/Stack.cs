@@ -11,7 +11,7 @@ namespace Practice.Sharp.Csharp.Data_Structures
     public sealed class Stack<T>
     {
         private const int DefaultSize = 10;
-        private T[] Array { get; set; }
+        private T[] Array { get; }
         private int Size { get; set; }
 
         public Stack(int capacity)

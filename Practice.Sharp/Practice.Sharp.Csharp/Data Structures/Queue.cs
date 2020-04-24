@@ -8,7 +8,7 @@ namespace Practice.Sharp.Csharp.Data_Structures
     public sealed class Queue
     {
         private const int DefaultQueueCapacity = 10;
-        private object[] Array { get; set; }
+        private object[] Array { get; }
         private int Size { get; set; }
 
         /// <summary>
