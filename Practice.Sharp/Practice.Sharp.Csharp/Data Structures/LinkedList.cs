@@ -10,18 +10,16 @@ namespace Practice.Sharp.Csharp.Data_Structures
         public LinkedList()
         {
             Head = null;
-            Tail = null;
         }
 
         public DoubleLinkedNode<T> Head { get; private set; }
-        public DoubleLinkedNode<T> Tail { get; private set; }
 
         public DoubleLinkedNode<T> Search(int key)
         {
             var x = Head;
             while (x != null && x.Key != key)
             {
-                x = Head.Next;
+                x = x.Next;
             }
 
             return x;
@@ -29,8 +27,16 @@ namespace Practice.Sharp.Csharp.Data_Structures
 
         public void Insert(int key, T data)
         {
-            var x = new DoubleLinkedNode<T>(key, data, Head);
-            Head = x;
+            if (Head == null)
+            {
+                Head  = new DoubleLinkedNode<T>(key, data);
+            }
+            else
+            {
+                var x = new DoubleLinkedNode<T>(key, data) {Next = Head};
+                Head.Prev = x;
+                Head = x;
+            }
         }
 
         public void Delete(int key)
@@ -41,14 +47,18 @@ namespace Practice.Sharp.Csharp.Data_Structures
             var next = el.Next;
             var prev = el.Prev;
 
-            if (next != null)
-            {
-                next.Prev = prev;
-            }
-
             if (prev != null)
             {
                 prev.Next = next;
+            }
+            else
+            {
+                Head = next;
+            }
+
+            if (next != null)
+            {
+                next.Prev = prev;
             }
         }
 
@@ -56,12 +66,12 @@ namespace Practice.Sharp.Csharp.Data_Structures
 
     public class DoubleLinkedNode<T>
     {
-        public DoubleLinkedNode(int key, T data, DoubleLinkedNode<T> next)
+        public DoubleLinkedNode(int key, T data)
         {
             Key = key;
             Data = data;
             Prev = null;
-            Next = next;
+            Next = null;
         }
 
         public int Key { get; set; }

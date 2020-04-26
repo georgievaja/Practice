@@ -48,6 +48,25 @@ module DataStructures =
         let underflowPop = new Func<obj>(fun () -> stack.Pop() :> obj)
         Assert.Throws<InvalidOperationException>(underflowPop)
 
+    [<Fact>]
+    let ``Double linked list ``() =
+        let exp = LinkedList()
+
+        exp.Insert(1, "Jana")
+        exp.Insert(2, "Theresa")
+        exp.Insert(3, "Denise")
+
+        let searchHead1 = exp.Search(3)
+        Assert.Equal(searchHead1, exp.Head)
+
+        exp.Delete(1)
+        let searchHead2 = exp.Search(3)
+        Assert.Equal(searchHead2, exp.Head)
+
+        exp.Delete(3)
+        let searchHead3 = exp.Search(2)
+        Assert.Equal(searchHead3, exp.Head)
+
 module Sorts =
     [<Theory>]
     [<InlineData(5,2,4,6,1,3)>]
