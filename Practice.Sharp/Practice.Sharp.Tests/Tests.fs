@@ -121,6 +121,45 @@ module Sorts =
 
         Assert.Equal<int[]>(expected, data) 
 
+module TapeEquilibrium =
+    [<Fact>]
+    let ``TapeEquilibrium returns correct result efficiently`` () =
+        let arr = [|1..100000|]
+        let result = TapeEquilibrium.FindMinDiffIndex(arr)
+
+        Assert.Equal(5658, result)
+
+    [<Theory>]
+    [<InlineData(1, 2, 3, 1, 5)>]
+    [<InlineData(4, 2, 3, 4, 5)>]
+    [<InlineData(0, 2, 2)>]
+    [<InlineData(2000, -1000, 1000)>]
+    [<InlineData(8, 2, 10, 20)>]
+    let ``TapeEquilibrium returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = TapeEquilibrium.FindMinDiffIndex(data)
+
+        Assert.Equal(expected, result)
+
+module PerfMissingElem =
+    [<Theory>]
+    [<InlineData(4, 2, 3, 1, 5)>]
+    [<InlineData(1, 2, 3, 4, 5)>]
+    [<InlineData(1, 2)>]
+    let ``PerfMissingElem returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = PerfMissingElem.FoundMissingPermutation(data)
+
+        Assert.Equal(expected, result)
+
+module FrogJumpTests =
+    [<Theory>]
+    [<InlineData(10, 85, 30, 3)>]
+    [<InlineData(10, 10, 30, 0)>]
+    [<InlineData(10, 20, 10, 1)>]
+    let ``Frog jump returns correct result`` (startP: int, endP: int, jump: int, expected: int) =
+        let result = FrogJump.CountJumps(startP, endP, jump)
+
+        Assert.Equal(expected, result)
+
 module BinaryGapsCsharpRecursionTests =
     [<Theory>]
     [<InlineData(529, 4)>]
