@@ -266,8 +266,38 @@ module OddOccurencesTests =
 
         Assert.Equal(result, Failure InvalidArrayMax)
 
-module CyclicRotation =
+module CyclicRotationCsharp =
+    [<Theory>]
+    [<InlineData(3)>]
+    [<InlineData(8)>]
+    [<InlineData(13)>]
+    [<InlineData(18)>]
+    [<InlineData(98)>]
+    [<InlineData(93)>]
+    [<InlineData(53)>]
+    let ``Rotation returns correct result`` (k: int) =
+        let data = [|3; 8; 9; 7; 6|]
+        CyclicRotation.RotateArray(data, k)
+        let expected: int[] = [|9; 7; 6; 3; 8|]
+        Assert.Equal<int[]>(expected, data)
 
+    [<Fact>]
+    let ``Rotation by 1 returns correct result`` () =
+      let data = [|0;0;0|]
+      let expected = [|0;0;0|]
+      CyclicRotation.RotateArray(data, 0)
+
+      Assert.Equal<int[]>(expected, data)
+
+    [<Fact>]
+    let ``Rotation by 0 returns correct result`` () =
+          let data = [|0;1;2;3;4;5|]
+          let expected = [|0;1;2;3;4;5|]
+          CyclicRotation.RotateArray(data, 0)
+
+          Assert.Equal<int[]>(expected, data)
+          
+module CyclicRotation =
     [<Theory>]
     [<InlineData(3)>]
     [<InlineData(8)>]
