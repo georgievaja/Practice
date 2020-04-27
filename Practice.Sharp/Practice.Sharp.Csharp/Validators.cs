@@ -10,5 +10,10 @@ namespace Practice.Sharp.Csharp
         {
             return num >= min && num <= max;
         }
+
+        public static bool IsInRange(this int[] arr, int min, int max)
+        {
+            return arr.Length >= min && arr.Length <= max;
+        }
     }
 }

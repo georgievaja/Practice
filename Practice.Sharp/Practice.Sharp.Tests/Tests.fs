@@ -215,6 +215,57 @@ module BinaryGapFsharpTests =
 
         Assert.False(succeeds)
 
+module OddOccurencesCsharpTests = 
+    [<Fact>]
+    let ``Odd occurrences finds nothing`` () =
+       let data = [|9;3;9;3;9;9|]
+       let result = OddOccurrence.GetOccurence data 
+       
+       Assert.Equal(0, result)
+
+    [<Fact>]
+    let ``Odd occurrences finds 7`` () =
+        let data = [|9;3;9;3;9;7;9|]
+        let result = OddOccurrence.GetOccurence data 
+
+        Assert.Equal(7, result)
+
+    [<Fact>]
+    let ``Odd occurrences finds 2`` () =
+            let data =  2 :: [1..40000] @ [1..40000]
+                        |> List.toArray
+            let result = OddOccurrence.GetOccurence data 
+
+            Assert.Equal(2, result)
+
+    [<Fact>]
+    let ``Odd occurrences array range fails (too large)`` () =
+        let data = [|1..1000001|]
+        let result = OddOccurrence.GetOccurence data 
+
+        Assert.Equal(0, result)
+
+    [<Fact>]
+    let ``Odd occurrences array range fails (too small)`` () =
+        let data = [||]
+        let result = OddOccurrence.GetOccurence data 
+
+        Assert.Equal(0, result)
+
+    [<Fact>]
+    let ``Odd occurrences array fails - element in invalid range (min)`` () =
+        let data = [|0;3;3|]
+        let result = OddOccurrence.GetOccurence data  
+
+        Assert.Equal(0, result)
+
+    [<Fact>]
+    let ``Odd occurrences array fails - element in invalid range (max)`` () =
+        let data = [|1000000001;3;3|]
+        let result = OddOccurrence.GetOccurence data 
+
+        Assert.Equal(0, result)
+
 module OddOccurencesTests = 
     [<Fact>]
     let ``Odd occurrences finds nothing`` () =
