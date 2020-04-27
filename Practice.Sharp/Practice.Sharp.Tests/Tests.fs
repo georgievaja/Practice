@@ -7,6 +7,7 @@ open Monads
 open Constants
 open Practice.Sharp.Csharp.Sorts.Comparision
 open Practice.Sharp.Csharp.Data_Structures
+open Practice.Sharp.Csharp
 
 module DataStructures =
     [<Fact>]
@@ -120,9 +121,53 @@ module Sorts =
 
         Assert.Equal<int[]>(expected, data) 
 
-module BinaryGapTests =
+module BinaryGapsCsharpRecursionTests =
+    [<Theory>]
+    [<InlineData(529, 4)>]
+    [<InlineData(51272, 4)>]
+    [<InlineData(9, 2)>]
+    [<InlineData(20, 1)>]
+    [<InlineData(15, 0)>]
+    [<InlineData(32, 0)>]
+    [<InlineData(1041, 5)>]
+    let ``Binary gap returns correct result`` (data: int, expected: int) =
+        let result = BinaryGapRecursion.CountBinaryGap(data)
 
+        Assert.Equal(result, expected)
 
+    [<Theory>]
+    [<InlineData(-1)>]
+    [<InlineData(0)>]
+    [<InlineData(null)>]
+    let ``Binary gap returns -1 for invalid range`` (data: int) =
+        let result = BinaryGapRecursion.CountBinaryGap(data)
+
+        Assert.Equal(result, -1)
+
+module BinaryGapsCsharpIterationTests =
+    [<Theory>]
+    [<InlineData(529, 4)>]
+    [<InlineData(51272, 4)>]
+    [<InlineData(9, 2)>]
+    [<InlineData(20, 1)>]
+    [<InlineData(15, 0)>]
+    [<InlineData(32, 0)>]
+    [<InlineData(1041, 5)>]
+    let ``Binary gap returns correct result`` (data: int, expected: int) =
+        let result = BinaryGapIteration.CountBinaryGap(data)
+
+        Assert.Equal(result, expected)
+
+    [<Theory>]
+    [<InlineData(-1)>]
+    [<InlineData(0)>]
+    [<InlineData(null)>]
+    let ``Binary gap returns -1 for invalid range`` (data: int) =
+        let result = BinaryGapIteration.CountBinaryGap(data)
+
+        Assert.Equal(result, -1)
+
+module BinaryGapFsharpTests =
     [<Theory>]
     [<InlineData(1)>]
     [<InlineData(15)>]
