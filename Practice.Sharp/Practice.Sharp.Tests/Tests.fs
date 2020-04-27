@@ -277,25 +277,31 @@ module CyclicRotationCsharp =
     [<InlineData(53)>]
     let ``Rotation returns correct result`` (k: int) =
         let data = [|3; 8; 9; 7; 6|]
-        CyclicRotation.RotateArray(data, k)
+        let result = CyclicRotation.RotateArray(data, k)
         let expected: int[] = [|9; 7; 6; 3; 8|]
-        Assert.Equal<int[]>(expected, data)
+        Assert.Equal<int[]>(expected, result)
+
+    [<Fact>]
+    let ``Extreme - empty array`` () =
+      let result = CyclicRotation.RotateArray([||], 1)
+
+      Assert.Equal<int[]>([||], result)
 
     [<Fact>]
     let ``Rotation by 1 returns correct result`` () =
       let data = [|0;0;0|]
       let expected = [|0;0;0|]
-      CyclicRotation.RotateArray(data, 0)
+      let result = CyclicRotation.RotateArray(data, 0)
 
-      Assert.Equal<int[]>(expected, data)
+      Assert.Equal<int[]>(expected, result)
 
     [<Fact>]
     let ``Rotation by 0 returns correct result`` () =
-          let data = [|0;1;2;3;4;5|]
-          let expected = [|0;1;2;3;4;5|]
-          CyclicRotation.RotateArray(data, 0)
+        let data = [|0;1;2;3;4;5|]
+        let expected = [|0;1;2;3;4;5|]
+        let result = CyclicRotation.RotateArray(data, 0)
 
-          Assert.Equal<int[]>(expected, data)
+        Assert.Equal<int[]>(expected, result)
           
 module CyclicRotation =
     [<Theory>]

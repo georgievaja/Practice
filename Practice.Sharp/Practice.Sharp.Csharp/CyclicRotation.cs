@@ -6,18 +6,27 @@ namespace Practice.Sharp.Csharp
 {
     public static class CyclicRotation
     {
-        public static void RotateArray(int[] arr, int steps)
+        public static int[] RotateArray(int[] A, int K)
         {
-            var rotationPoint = steps % arr.Length;
-            if (rotationPoint != 0)
-            {
-                var split = rotationPoint - 1;
-                var temp = new int[split];
+            var N = A.Length;
+            var rotatedArray = new int[A.Length];
 
-                Array.Copy(arr, temp, split);
-                Array.Copy(arr, split, arr, 0, arr.Length - split);
-                Array.Copy(temp, 0, arr, arr.Length - split, split);
+            if (K < 0 || K > 100 || N == 0)
+            {
+                return rotatedArray;
             }
+
+            if (N == 1)
+            {
+                return A;
+            }
+
+            for (var i = 0; i < N; i++)
+            {
+                rotatedArray[(i + K) % N] = A[i];
+            }
+
+            return rotatedArray;
         }
     }
 }
