@@ -121,6 +121,35 @@ module Sorts =
 
         Assert.Equal<int[]>(expected, data) 
 
+module PermCheck =
+    [<Theory>]
+    [<InlineData(0, 1, 60, 2, 3, 4)>]
+    [<InlineData(1, 1, 5, 2, 3, 4)>]
+    [<InlineData(0, 1, 1, 2, 3, 4)>]
+    [<InlineData(0, 1, 40, 3)>]
+    [<InlineData(1, 1, 2)>]
+    [<InlineData(0, 6, 5, 4)>]
+    [<InlineData(1, 1)>]
+    let ``PermCheck returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = PermCheck.ArrayIsPermutation(data)
+
+        Assert.Equal(expected, result)
+
+    [<Fact>]
+    let ``PermCheck extremes returns correct result`` () =
+        let arr = [|1..100000|]
+        let result = PermCheck.ArrayIsPermutation(arr)
+
+        Assert.Equal(1, result)
+
+    [<Fact>]
+    let ``PermCheck elements extremes returns correct result`` () =
+        let arr = [|1; 1000000000|]
+        let result = PermCheck.ArrayIsPermutation(arr)
+
+        Assert.Equal(0, result)
+
+
 module MissingInteger =
     [<Theory>]
     [<InlineData(5, 1, 3, 6, 4, 1, 2)>]
