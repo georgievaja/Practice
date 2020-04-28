@@ -121,6 +121,25 @@ module Sorts =
 
         Assert.Equal<int[]>(expected, data) 
 
+module FrogRiverOne =
+    [<Theory>]
+    [<InlineData(6, 5, 1, 3, 1, 4, 2, 3, 5, 4)>]
+    [<InlineData(-1, 5, 1, 3, 1, 4, 2, 3, 4, 4)>]
+    [<InlineData(0, 1, 1, 3, 1, 4, 2, 3, 5, 4)>]
+    [<InlineData(0, 1, 1)>]
+    [<InlineData(7, 5, 1, 3, 1, 4, 2, 3, 4, 5)>]
+    let ``FrogRiverOne returns correct result`` (expected: int, position: int, [<ParamArray>] data: int[]) =
+        let result = FrogRiverOne.GetTimeToJump(data, position)
+
+        Assert.Equal(expected, result)
+
+    [<Fact>]
+    let ``FrogRiverOne returns correct result efficiently`` () =
+        let arr = [|1..100000|]
+        let result = FrogRiverOne.GetTimeToJump(arr, 99999)
+
+        Assert.Equal(99998, result)
+
 module TapeEquilibrium =
     [<Fact>]
     let ``TapeEquilibrium returns correct result efficiently`` () =
