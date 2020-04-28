@@ -121,6 +121,18 @@ module Sorts =
 
         Assert.Equal<int[]>(expected, data) 
 
+module MaxCounters =
+    [<Fact>]
+    let ``MaxCounters returns correct result`` () =
+        let result1 = MaxCounters.ReturnCounters(5, [|3;4;4;6;1;4;4|])
+        Assert.Equal<int[]>([|3;2;2;4;2|], result1)
+
+        let result2 = MaxCounters.ReturnCounters(1, [|2|])        
+        Assert.Equal<int[]>([|0;|], result2)
+
+        let result3 = MaxCounters.ReturnCounters(2, [|1;3|])        
+        Assert.Equal<int[]>([|1;1|], result3)
+
 module FrogRiverOne =
     [<Theory>]
     [<InlineData(6, 5, 1, 3, 1, 4, 2, 3, 5, 4)>]
