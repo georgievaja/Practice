@@ -121,6 +121,38 @@ module Sorts =
 
         Assert.Equal<int[]>(expected, data) 
 
+module MissingInteger =
+    [<Theory>]
+    [<InlineData(5, 1, 3, 6, 4, 1, 2)>]
+    [<InlineData(4, 1, 2, 3)>]
+    [<InlineData(1, -1, -3)>]
+    [<InlineData(1, -1)>]
+    let ``MissingInteger returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = MissingInteger.GetSmallestMissingInteger(data)
+
+        Assert.Equal(expected, result)
+
+    [<Fact>]
+    let ``MissingInteger extremes returns correct result efficiently`` () =
+        let arr = [|1..100000|]
+        let result = MissingInteger.GetSmallestMissingInteger(arr)
+
+        Assert.Equal(100001, result)
+
+    [<Fact>]
+    let ``MissingInteger elements extremes returns correct result efficiently`` () =
+        let arr = [|-1000000; 1000000|]
+        let result = MissingInteger.GetSmallestMissingInteger(arr)
+
+        Assert.Equal(1, result)
+
+    [<Fact>]
+    let ``MissingInteger returns correct result efficiently`` () =
+        let arr = [|1..99999|]
+        let result = MissingInteger.GetSmallestMissingInteger(arr)
+
+        Assert.Equal(100000, result)
+
 module MaxCounters =
     [<Fact>]
     let ``MaxCounters returns correct result`` () =
