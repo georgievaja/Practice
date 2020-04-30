@@ -8,6 +8,7 @@ open Constants
 open Practice.Sharp.Csharp.Sorts.Comparision
 open Practice.Sharp.Csharp.Data_Structures
 open Practice.Sharp.Csharp
+open System.Linq
 
 module DataStructures =
     [<Fact>]
@@ -121,6 +122,281 @@ module Sorts =
 
         Assert.Equal<int[]>(expected, data) 
 
+module EquiLeader =
+    [<Theory>]
+    [<InlineData(2, 4, 3, 4, 4, 4, 2)>]
+    let ``EquiLeader returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = EquiLeader.GetEquiLeadersCount(data)
+
+        Assert.Equal(expected, result)
+
+module Dominator =
+    [<Fact>]
+    let ``Dominator extremes returns correct result`` () =
+        let data = Array.create 100000 -2147483648
+        let result = Dominator.FindDominator(data)
+
+        Assert.Equal(99999, result)
+
+        let data2 = Array.create 100000 2147483647
+        let result2 = Dominator.FindDominator(data2)
+
+        Assert.Equal(99999, result2)
+    
+    [<Theory>]
+    [<InlineData(7, 3, 4, 3, 2, 3, -1, 3, 3)>]
+    [<InlineData(0,1)>]
+    [<InlineData(-1)>]
+    let ``Dominator returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = Dominator.FindDominator(data)
+
+        Assert.Equal(expected, result)
+
+module StoneWall =
+    [<Theory>]
+    [<InlineData(7, 8, 8, 5, 7, 9, 8, 7, 4, 8)>]
+    [<InlineData(1,1)>]
+    [<InlineData(1,1,1)>]
+    [<InlineData(2,1,8)>]
+    let ``StoneWall returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = StoneWall.CountBlock(data)
+
+        Assert.Equal(expected, result)
+
+module Fish =
+    [<Fact>]
+    let ``Fish example returns correct result`` () =
+        let a = [|4;3;2;1;5|]
+        let b = [|0;1;0;0;0|]
+        let result = Fish.GetNumberOfSurviving(a,b)
+
+        Assert.Equal(2, result)
+    
+    [<Fact>]
+    let ``Fish returns correct result`` () =
+        let a = [|1..100000|]
+        let b = Array.create 100000 1
+        let result = Fish.GetNumberOfSurviving(a,b)
+
+        Assert.Equal(100000, result)
+
+        let a2 = [|1..100000|]
+        let b2 = Array.create 99999 1
+        let br = b2.Append(0) |> Seq.toArray
+
+        let result2 = Fish.GetNumberOfSurviving(a2,br)
+        Assert.Equal(1, result2)
+
+        let a2 = [|1..100000|]
+        let b2 = Array.create 99999 0
+        let br = b2.Append(1) |> Seq.toArray
+
+        let result2 = Fish.GetNumberOfSurviving(a2,br)
+        Assert.Equal(100000, result2)
+
+module Nesting =
+    [<Theory>]
+    [<InlineData(0, "ahoj")>]
+    [<InlineData(0, "[ahoj]")>]
+    [<InlineData(1, "")>]
+    [<InlineData(0, "{[()()]}")>]
+    [<InlineData(0, "[()()]}")>]
+    [<InlineData(0, "())")>]
+    [<InlineData(1, "(()(())())")>]
+    let ``Single nesting returns correct result`` (expected: int, str: string) =
+        let result = Nesting.CheckSingleNesting(str)
+
+        Assert.Equal(expected, result) 
+
+    [<Theory>]
+    [<InlineData(1, "ahoj")>]
+    [<InlineData(1, "[ahoj]")>]
+    [<InlineData(1, "")>]
+    [<InlineData(1, "{[()()]}")>]
+    [<InlineData(0, "[()()]}")>]
+    [<InlineData(0, "([)()]")>]
+    let ``Multiple nesting returns correct result`` (expected: int, str: string) =
+        let result = Nesting.CheckMultipleNesting(str)
+
+        Assert.Equal(expected, result) 
+
+module Triangle =
+   [<Fact>]
+   let ``Triangle upper extreme returns correct result`` () =
+       let arr = (Array.create 100000 2147483647)
+       let result = Triangle.TriangleExists(arr)
+
+       Assert.Equal(1, result)
+
+       let arr2 = (Array.create 100000 -2147483647)
+       let result2 = Triangle.TriangleExists(arr2)
+
+       Assert.Equal(0, result2)
+   
+   [<Theory>]
+   [<InlineData(1, 10, 2, 5, 1, 8, 20)>]
+   [<InlineData(0)>]
+   [<InlineData(0, 10, 50, 5, 1)>]
+   let ``Triangle returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+       let result = Triangle.TriangleExists(data)
+
+       Assert.Equal(expected, result) 
+
+module NumberOfDiscIntersections =
+    [<Fact>]
+    let ``MaxProductOfThree upper extreme returns correct result`` () =
+        let arr = (Array.create 100000 2147483647)
+        let result = MaxProductOfThree.CountMaxProductOfThree(arr)
+
+        Assert.Equal(2147483647, result)
+    
+    [<Theory>]
+    [<InlineData(11, 1, 5, 2, 1, 4, 0)>]
+    [<InlineData(0)>]
+    [<InlineData(3, 2147483647, 0, 0, 0)>]
+    let ``NumberOfDiscIntersections returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = NumberOfDiscIntersections.Count(data)
+
+        Assert.Equal(expected, result)
+
+module MaxProductOfThree =
+    [<Fact>]
+    let ``MaxProductOfThree upper extreme returns correct result`` () =
+        let arr = (Array.create 100000 1000)
+        let result = MaxProductOfThree.CountMaxProductOfThree(arr)
+
+        Assert.Equal(1000000000, result)
+
+    [<Theory>]
+    [<InlineData(60, -3, 1, 2, -2, 5, 6)>]
+    [<InlineData(150, -10, -3, 4, 5, 5)>]
+    [<InlineData(-24, -10, -3, -2, -4, -5)>]
+    [<InlineData(20000, -1000, 3, 4, 5, 1000)>]
+    let ``MaxProductOfThree returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = MaxProductOfThree.CountMaxProductOfThree(data)
+
+        Assert.Equal(expected, result)
+
+module Distinct =
+    [<Fact>]
+    let ``Distinct upper extreme returns correct result`` () =
+        let arr = [|1..100000|]
+        let result = Distinct.CountDistinctInt(arr)
+
+        Assert.Equal(100000, result)
+
+    [<Theory>]
+    [<InlineData(2, 1, 0, 0, 0, 1)>]
+    [<InlineData(3, 3, 1, 4, 1, 1)>]
+    [<InlineData(3, 2, 1, 1, 2, 3, 1)>]
+    [<InlineData(2, -1000000, 1000000)>]
+    [<InlineData(0)>]
+    let ``Distinct returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = Distinct.CountDistinctInt(data)
+
+        Assert.Equal(expected, result)
+
+module PassingCars =
+    
+    [<Fact>]
+    let ``PassingCars upper extremes returns correct result`` () =
+        let arr = (Array.create 100000 0)
+        let result = PassingCars.CountCars(arr)
+
+        Assert.Equal(0, result)
+
+        let arr2 = (Array.create 99999 0)
+        let arr3 = arr2.Append(1) |> Seq.toArray
+        let result2 = PassingCars.CountCars(arr3)
+
+        Assert.Equal(99999, result2)
+
+    [<Theory>]
+    [<InlineData(3, 1, 0, 0, 0, 1)>]
+    [<InlineData(5, 0, 1, 0, 1, 1)>]
+    [<InlineData(0, 0, 0, 0, 0, 0)>]
+    [<InlineData(0, 1)>]
+    let ``PassingCars returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = PassingCars.CountCars(data)
+
+        Assert.Equal(expected, result)
+
+module MinAvgTwoSlice =
+    [<Theory>]
+    [<InlineData(1, 4, 2, 2, 5, 1, 5, 8)>]
+    [<InlineData(0, 2, 2, 2, 2, 2, 2, 2)>]
+    [<InlineData(0, 1)>]
+    let ``MinAvgTwoSlice returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = MinAvgTwoSlice.FindStartingPoint(data)
+
+        Assert.Equal(expected, result)
+
+    [<Fact>]
+    let ``MinAvgTwoSlice returns correct result efficiently`` () =
+        let arr = [|-10000..10000|]
+
+        let result = MinAvgTwoSlice.FindStartingPoint(arr)
+        
+        Assert.Equal(0, result)
+
+module GenomicRangeQuery =
+    [<Fact>]
+    let ``GenomicRangeQuery N, M high extremes returns correct result`` () =
+        let p = [|1..50000|]
+        let q = [|1..50000|] |> Array.rev
+        let chars = "CAGCCTAACG"
+        let res = Enumerable.Repeat(chars, 10000) |> String.Concat
+        let result = GenomicRangeQuery.GetMinimalNucleotideFactors(p, q, res)
+        Assert.Equal<int[]>(result, result)
+
+    [<Fact>]
+    let ``GenomicRangeQuery N high extremes returns correct result`` () =
+        let p = [|2;5;0|]
+        let q = [|4;5;6|]
+        let chars = "CCCCCCCCCC"
+        let res = Enumerable.Repeat(chars, 10000) |> String.Concat
+        let result = GenomicRangeQuery.GetMinimalNucleotideFactors(p, q, res)
+        Assert.Equal<int[]>([|2;2;2|], result)
+
+    [<Fact>]
+    let ``GenomicRangeQuery N low extremes returns correct result`` () =
+        let p = [|0;0;0|]
+        let q = [|0;0;0|]
+
+        let result = GenomicRangeQuery.GetMinimalNucleotideFactors(p, q, "C")
+        Assert.Equal<int[]>([|2;2;2|], result)
+
+    [<Fact>]
+    let ``GenomicRangeQuery returns correct result`` () =
+        let p = [|2;5;0|]
+        let q = [|4;5;6|]
+
+        let result = GenomicRangeQuery.GetMinimalNucleotideFactors(p, q, "CAGCCTA")
+        Assert.Equal<int[]>([|2;4;1|], result)
+
+module CountDiv = 
+    [<Theory>]
+    [<InlineData(0, 1, 6, 11)>]
+    [<InlineData(1, 1, 3, 2)>]
+    [<InlineData(3, 6, 11, 2)>]
+    [<InlineData(1, 1, 5, 5)>]
+    [<InlineData(1, 1, 2000000000, 2000000000)>]
+    [<InlineData(2000000000, 1, 2000000000, 1)>]
+    let ``CountDiv returns correct result`` (expected: int, first: int, last: int, div: int) =
+        let result = CountDiv.CountDivisibleNum(first, last, div)
+
+        Assert.Equal(expected, result)
+
+module PrefixSums =
+    [<Fact>]
+    let ``PrefixSums returns correct result`` () =
+        let arr = [|1..100000|]
+
+        let result = PrefixSums.CountPrefixSums(arr)
+
+        let res = PrefixSums.MushroomPicker([|2;3;7;5;1;3;9|], 4, 6)
+        Assert.Equal(25, res)
+
 module PermCheck =
     [<Theory>]
     [<InlineData(0, 1, 60, 2, 3, 4)>]
@@ -138,6 +414,7 @@ module PermCheck =
     [<Fact>]
     let ``PermCheck extremes returns correct result`` () =
         let arr = [|1..100000|]
+
         let result = PermCheck.ArrayIsPermutation(arr)
 
         Assert.Equal(1, result)
