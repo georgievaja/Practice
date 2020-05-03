@@ -122,6 +122,112 @@ module Sorts =
 
         Assert.Equal<int[]>(expected, data) 
 
+module PrimeNumbers =
+    [<Fact>]
+    let ``PeaksSlice upper extreme returns correct result`` () =
+        let arr = (Array.create 100000 0)
+        let result = PrimeNumbers.CountPeaksSlices(arr)
+
+        Assert.Equal(0, result)
+
+        let arr2 = (Array.create 100000 1000000000)
+        let result2 = PrimeNumbers.CountPeaksSlices(arr2)
+        Assert.Equal(0, result2)
+
+    [<Theory>]
+    [<InlineData(1, 1, 4, 3)>]
+    [<InlineData(3, 1, 1, 4, 3, 1,45,1,3,1)>]
+    [<InlineData(2, 1, 1, 4, 3, 1,45,1,1,1,1,1,1)>]
+    [<InlineData(2, 10, 1, 4, 3, 1,45,1,1,1,1,1,10)>]
+    [<InlineData(0, 1, 2, 3, 3, 3, 3, 1, 2, 3, 4, 4, 2)>]
+    [<InlineData(1, 1, 2, 3, 4, 3, 3, 1, 2, 3, 4, 4, 2)>]
+    [<InlineData(3, 1, 2, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2)>]
+    let ``PeaksSlice returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = PrimeNumbers.CountPeaksSlices(data)
+
+        Assert.Equal(expected, result)
+
+    [<Fact>]
+    let ``Flags upper extreme returns correct result`` () =
+        let arr = (Array.create 400000 10000)
+        let result = PrimeNumbers.CountFlags(arr)
+
+        Assert.Equal(0, result)
+
+        let arr2 = [|0..100000|]
+        let result2 = PrimeNumbers.CountFlags(arr2)
+        Assert.Equal(0, result2)
+
+    [<Theory>]
+    [<InlineData(3, 1, 5, 3, 4, 3, 4, 1, 2, 3, 4, 6, 2)>]
+    [<InlineData(0,1,1,1,1,1,1,1,1,1,1,1,1)>]
+    [<InlineData(0,1)>]
+    let ``Flags returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = PrimeNumbers.CountFlags(data)
+
+        Assert.Equal(expected, result)
+
+    [<Theory>]
+    [<InlineData(3, 9)>]
+    [<InlineData(8, 24)>]
+    [<InlineData(1, 1)>]
+    [<InlineData(2, 2147483647)>]
+    let ``Divisors returns correct result`` (expected: int, n: int) =
+        let result = PrimeNumbers.CountNumberOfDivisors(n)
+
+        Assert.Equal(expected, result)
+
+    [<Theory>]
+    [<InlineData(false, 9)>]
+    [<InlineData(true, 3)>]
+    let ``PrimeNumbers returns correct result`` (expected: bool, n: int) =
+        let result = PrimeNumbers.IsPrimeNumber(n)
+
+        Assert.Equal(expected, result)
+
+module MaxSlice =
+    [<Theory>]
+    [<InlineData(17, 3, 2, 6, -1, 4, 5, -1, 2)>]
+    [<InlineData(0, 3, 3, 3)>]
+    [<InlineData(3, 3, 3, 3, 3)>]
+    [<InlineData(2, 3, 2, 1, 3)>]
+    let ``DoubleMaxSlice returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = MaxSlice.CountDoubleMaxSlice(data)
+
+        Assert.Equal(expected, result)
+
+    [<Theory>]
+    [<InlineData(5, 3, 2, -6, 4, 0)>]
+    [<InlineData(-1)>]
+    [<InlineData(5,5)>]
+    [<InlineData(10,5,5)>]
+    [<InlineData(2,1,-5,2)>]
+    [<InlineData(20,5,5, -10, 20)>]
+    [<InlineData(-1000000, -1000000, -1000000)>]
+    [<InlineData(2000000, 1000000, 1000000)>]
+    let ``MaxSliceSum returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = MaxSlice.CountMaxSliceSum(data)
+
+        Assert.Equal(expected, result)
+
+    [<Theory>]
+    [<InlineData(0)>]
+    [<InlineData(0, 23171)>]
+    [<InlineData(0, 23171, 23171)>]
+    [<InlineData(356, 23171, 21011, 21123, 21366, 21013, 21367)>]
+    let ``CountMaxProfit returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = MaxSlice.CountMaxProfit(data)
+
+        Assert.Equal(expected, result)
+
+    [<Theory>]
+    [<InlineData(10, 5, -7, 3, 5, -2, 4, -1)>]
+    [<InlineData(20, 3, 2, 6, -1, 4, 5, -1, 2)>]
+    let ``MaxSlice returns correct result`` (expected: int, [<ParamArray>] data: int[]) =
+        let result = MaxSlice.CountMaxSlice(data)
+
+        Assert.Equal(expected, result)
+
 module EquiLeader =
     [<Theory>]
     [<InlineData(2, 4, 3, 4, 4, 4, 2)>]
