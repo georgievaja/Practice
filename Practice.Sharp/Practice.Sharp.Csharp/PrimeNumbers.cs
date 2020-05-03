@@ -31,16 +31,11 @@ namespace Practice.Sharp.Csharp
 
             if (!hasPeak) return 0;
             
-            var lastPeak = -1;
             for (var i = A.Length - 2; i > -1; i--)
             {
                 if (peaks[i])
                 {
                     next[i] = i;
-                    if (lastPeak == -1)
-                    {
-                        lastPeak = i;
-                    }
                 }
                 else
                 {
@@ -48,14 +43,7 @@ namespace Practice.Sharp.Csharp
                 }
             }
 
-            var index = A.Length - 1;
-            while (index >= 0 && next[index] == -1)
-            {
-                next[index] = lastPeak;
-                index--;
-            }
-
-            index = 0;
+            var index = 0;
 
             var dividers = GetDividers(next.Length);
 
@@ -65,8 +53,10 @@ namespace Practice.Sharp.Csharp
                 var nextI = 0;
 
                 while (nextI < next.Length - size 
+                       && next[nextI + size] != -1
                        && (next[nextI] != next[nextI + size] 
-                           || next[nextI] != next[nextI + size + size - 1]))
+                           || (next[nextI + size + size - 1] != -1 
+                               && next[nextI] != next[nextI + size + size - 1])))
                 {
                     nextI += size;
                 }
